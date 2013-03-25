@@ -57,17 +57,18 @@ public class MyMojo extends AbstractMojo
 						String data = "Date=" + timeStamp + "&Name=" + testName + "&Count=" + testsCount + 
 								"&Failures=" + testsFailures + "&Errors=" + testsErrors + "&Skipped=" + testsSkipped;
 				 
-				        URL url = new URL("http://httpbin.org/post");
+				        URL url = new URL("http://localhost:8080");
 				        URLConnection conn = url.openConnection();
 				        conn.setDoOutput(true);
 				        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
 				        wr.write(data);
 				        wr.flush();
 				        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				        String ine = rd.readLine();
 				        
-				        String line;
+				        /*String line;
 				        while ((line = rd.readLine()) != null)
-				            System.out.println(line);
+				            System.out.println(line);*/
 
 				        wr.close();
 				        rd.close();
