@@ -6,5 +6,7 @@ else
 	false
 fi
 
-OUTPUT=`git reflog show --date=local`
+OUTPUT=`git reflog show origin/master --date=local`
+"/n"
 echo $OUTPUT
+
