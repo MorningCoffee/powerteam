@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#if test -t 1; then	#test connection with terminal 
+#	exec>log>&1	#redirect output from terminal to the file
+#else 
+#	echo "FAILED!"	#message about error
+#fi
+
+#OUTPUT=`git reflog show origin/master --date=local --since="yesterday"`	#execute command reflog
+#echo $OUTPUT
+
+
+git reflog show origin/master --date=local --since="yesterday" > log.txt
+

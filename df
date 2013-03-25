@@ -1,0 +1,43 @@
+commit c4f89ed1395d724ad1ad21253885e2c04f6268b7
+Author: Babichok <ababichok@morningcoffeesoft.com>
+Date:   Wed Mar 20 19:33:51 2013 +0200
+
+    First day Ruby
+
+commit c65fceba3f9566a69a1029f77f397e0bdaa7c506
+Merge: 6b2848f bf3bcb2
+Author: Babichok <ababichok@morningcoffeesoft.com>
+Date:   Wed Mar 20 18:24:00 2013 +0200
+
+    Merge branch 'master' of https://github.com/MorningCoffee/powerteam
+
+commit 6b2848f1f156ababb74e188f53872d7663295726
+Author: Babichok <ababichok@morningcoffeesoft.com>
+Date:   Wed Mar 20 18:17:34 2013 +0200
+
+    First version
+    ^X
+
+commit bf3bcb2f82e769b9d0a270979c44241326ffa35e
+Author: Markiyan Matviyiv <mmatviyiv@morningcoffeesoft.com>
+Date:   Wed Mar 20 18:16:50 2013 +0200
+
+    deleting
+
+commit ea4231b95029db079d9eca166c2bba5f1f2c7429
+Author: Markiyan Matviyiv <mmatviyiv@morningcoffeesoft.com>
+Date:   Wed Mar 20 18:00:12 2013 +0200
+
+    maven project added
+
+commit 1a9e5005d96baf3f5ca475791581f2666d285ba2
+Author: Babichok <ababichok@morningcoffeesoft.com>
+Date:   Fri Mar 15 18:17:31 2013 +0200
+
+    First Commit
+
+commit af8d3df6fac1758decf5560198a1edc1883ffa9b
+Author: Anton Babichok <ababichok@silver.(none)>
+Date:   Fri Mar 15 18:05:32 2013 +0200
+
+    first commit
