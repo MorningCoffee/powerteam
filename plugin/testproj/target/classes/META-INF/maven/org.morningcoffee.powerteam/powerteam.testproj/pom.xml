@@ -2,8 +2,8 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>ru.apache_maven</groupId>
-  <artifactId>testproj</artifactId>
+  <groupId>org.morningcoffee.powerteam</groupId>
+  <artifactId>powerteam.testproj</artifactId>
   <version>0.1</version>
   <packaging>jar</packaging>
 
@@ -26,8 +26,8 @@
   <build>
     <plugins>
       <plugin>
-		<groupId>morningcoffee</groupId>
-		<artifactId>powerteam</artifactId>
+		<groupId>org.morningcoffee.powerteam</groupId>
+		<artifactId>powerteam.plugin</artifactId>
 		<version>0.1</version>
 		<executions>
 		  <execution>
