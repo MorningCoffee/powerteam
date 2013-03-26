@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>morningcoffee</groupId>
+    <groupId>org.morningcoffee.powerteam</groupId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>powerteam-server</name>
-    <artifactId>powerteam-server</artifactId>
+    <name>Powerteam Maven Server</name>
+    <artifactId>powerteam.server</artifactId>
     <packaging>jar</packaging>
 
     <properties>
@@ -42,7 +42,7 @@
 		              <addClasspath>true</addClasspath>
         		      <classpathPrefix>${settings.localRepository}</classpathPrefix>
 		              <classpathLayoutType>repository</classpathLayoutType>
-		              <mainClass>morningcoffee.powerteam_server.Main</mainClass>
+		              <mainClass>org.morningcoffee.powerteam.server.Main</mainClass>
 		            </manifest>
 		          </archive>
 		        </configuration>
