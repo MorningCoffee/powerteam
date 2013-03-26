@@ -16,11 +16,9 @@ public class Main extends AbstractHandler
                        HttpServletResponse response) 
         throws IOException, ServletException
     {
-    	response.setContentType("text/html;charset=utf-8");
-        response.setStatus(HttpServletResponse.SC_OK);
         baseRequest.setHandled(true);
         
-    	String testDate = request.getParameter("Date");
+    	/*String testDate = request.getParameter("Date");
     	String testName = request.getParameter("Name");
     	String testCount = request.getParameter("Count");
     	String testFailed = request.getParameter("Failures");
@@ -28,9 +26,11 @@ public class Main extends AbstractHandler
     	String testSkipped = request.getParameter("Skipped");
     	
         System.out.println("Name: " + testName + "; Date: " + testDate + "; Count: " + testCount + 
-        		"; Failed: " + testFailed+ "; Errors: " + testErrors + "; Skipped: " + testSkipped);
+        		"; Failed: " + testFailed+ "; Errors: " + testErrors + "; Skipped: " + testSkipped);*/
         
-        response.getWriter().println("");
+        String data = request.getParameter("data");
+        System.out.println(data);
+        
     }
  
     public static void main(String[] args) throws Exception
