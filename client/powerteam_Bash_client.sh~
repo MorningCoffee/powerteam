@@ -1,5 +1,11 @@
 #!/bin/bash
 
 git reflog show origin/master --date=local --since="yesterday" > log.txt	#execute command reflog
+
+#STR="HELL"
+#echo $STR
+#A=$(git reflog show origin/master --date=local --since="yesterday")
+#echo $A
+
 ruby powerteam_Ruby_client.rb
 
