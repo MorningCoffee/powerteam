@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="derby-1364502551349--877266965" provider="generic" driver="derby" name="Derby - db" create-date="1364502551349" update-date="1364502744660" save-password="true" show-system-objects="true" read-only="false">
+		<connection server="" database="/home/mark/workspace/db" url="jdbc:derby:/home/mark/workspace/db" user="" type="dev"/>
+		<custom-property name="default.autocommit" value="false"/>
+	</data-source>
+</data-sources>

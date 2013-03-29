@@ -60,7 +60,7 @@ public class PostTest extends AbstractMojo
     	}
     	
     	long timeStamp = new Date().getTime();
-		RequestGen rg = new RequestGen(PreTest.time, timeStamp, testResult, GitInformer.getName());
+		RequestGen rg = new RequestGen(PreTest.time, timeStamp, testResult, GitInfo.getName());
 		String data = "data=" + rg.getJSON();	
    	
     	try {

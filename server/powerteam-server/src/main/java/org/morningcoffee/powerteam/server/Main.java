@@ -21,6 +21,11 @@ public class Main extends AbstractHandler
     	String data = request.getParameter("data");
         System.out.println(data);
         
+        DBLogger rl = new DBLogger();
+        rl.createConnection();
+        rl.addLog(data);
+        //rl.closeConnection();
+        
     }
  
     public static void main(String[] args) throws Exception

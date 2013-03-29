@@ -3,7 +3,7 @@ package org.morningcoffee.powerteam.plugin;
 import java.io.*;
 import java.util.Properties;
 
-public class GitInformer {
+public class GitInfo {
 	
 	private static String exec(String path, String command) {
 		Runtime run = Runtime.getRuntime();
@@ -44,6 +44,6 @@ public class GitInformer {
     		System.exit(-5);
         }
     	
-    	return GitInformer.exec(gitPath, "git config user.name");
+    	return GitInfo.exec(gitPath, "git config user.name");
 	}
 }
