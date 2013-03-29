@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: FailTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.103 sec <<< FAILURE!
-testApp(FailTest)  Time elapsed: 0.015 sec  <<< FAILURE!
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.051 sec <<< FAILURE!
+testApp(FailTest)  Time elapsed: 0.014 sec  <<< FAILURE!
 junit.framework.AssertionFailedError
 	at junit.framework.Assert.fail(Assert.java:47)
 	at junit.framework.Assert.assertTrue(Assert.java:20)

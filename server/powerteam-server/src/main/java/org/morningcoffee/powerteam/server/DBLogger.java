@@ -9,7 +9,7 @@ import com.google.gson.*;
 
 public class DBLogger {
 
-	private String dbURL = "jdbc:derby:/home/mark/workspace/powerteam/server/powerteam-server/db;create=true";
+	private String dbURL = "jdbc:derby:" + System.getProperty("user.dir") + "/db;create=true";
     private Connection conn = null;
     private Statement stmt = null;
 	
@@ -50,12 +50,12 @@ public class DBLogger {
     {
 		LogRequest rq = new Gson().fromJson(data, LogRequest.class);
 		String sqlReq = "";
-		if(rq.type == "plugin")
-			sqlReq = "INSERT INTO APP.PLUGINLOGS (start_time, end_time, test_result, user_id) values ('" +
-	        		rq.startTime + "','" + rq.endTime + "','" + rq.testResult + "', (SELECT USER_ID FROM " +
-					"APP.USERS WHERE USER_NAME = '" + rq.userName + "'))";
-		else sqlReq = "INSERT INTO APP.CLIENTLOGS (hash, date, user_id) values ('" + rq.hash + "','" + 
-					rq.date + "', (SELECT USER_ID FROM " + "APP.USERS WHERE USER_NAME = '" + rq.userName + "'))";
+		if(rq.type.equals("plugin"))
+			sqlReq = String.format("INSERT INTO APP.PLUGINLOGS (start_time, end_time, test_result, user_id) values " +
+					"(%d, %d, '%s', (SELECT USER_ID FROM APP.USERS WHERE USER_NAME = '%s'))", 
+					rq.startTime, rq.endTime, rq.testResult, rq.userName);
+		else sqlReq = String.format("INSERT INTO APP.CLIENTLOGS (hash, date, user_id) values ('%s', %d, " +
+				"(SELECT USER_ID FROM APP.USERS WHERE USER_NAME = '%s'))", rq.hash, rq.date, rq.userName);
 		
         try
         {
