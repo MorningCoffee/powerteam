@@ -2,57 +2,57 @@ require 'net/http'
 require 'json'
 
 class Client
-	def print_log
-		print ENV['LOG'] 
-	end
 
-	def post
-		uri = URI('http://httpbin.org/post')
-		res = Net::HTTP.post_form(uri, 'q' => 'ruby', 'max' => '50')
-		#puts res.body
-		
-		case res
-		when Net::HTTPSuccess, Net::HTTPRedirection
-  			puts "NO ERRORS!"
-			data='111'
-			puts data
-		else
-  			puts "ERROR!"
-		end
-	end
-
-
-	def json_string
-		puts "\n\nJSON\n\n"
-		log_r=ENV['LOG']
+	def post_json_string		
+		type='client' 
 		user=ENV['USER']
-		type='client' 	
+		log_r=ENV['LOG']
+		#hash=log_r[0..6]
+		#date=log_r[36..59]
 		
-		hash=log_r[0..7]
-		date=log_r[36..59]
-
-		puts type
-		puts user
-		puts hash		
-		puts date
-
-		puts "\n"
+		puts log_r		
 		
-
-		#log_r.scan("\z")
+		log_r.each_line do |line|			
+			if line.include? "update by push"
+				puts line
+				hash=line[0..6]
+				date=line[36..59]			
+				json_string = {
+			      		"type"=>type, 
+			      		"user"=>user,
+					"hash"=>hash,
+					"date"=>date
+			     	}.to_json
+				puts json_string
+				
+				uri = URI('http://httpbin.org/post')
+				res = Net::HTTP.post_form(uri, json_string)
 		
-		json_string = {
-			      	"type"=>type, 
-			      	"user"=>user,
-				"hash"=>hash,
-				"date"=>date,
-			      }.to_json
-		puts json_string						
-		
+				case res
+				when Net::HTTPSuccess, Net::HTTPRedirection
+  					puts "NO ERRORS!"
+				else
+  					puts "ERROR!"
+				end
+				puts "\n"
+			end
+		end						
 	end
+
 end
 
 client = Client.new
-client.print_log
-#client.post
-client.json_string
+client.post_json_string
+
+at_exit do
+  if $!.nil? || $!.is_a?(SystemExit) && $!.success?
+    puts 'Finish ruby: 0'
+  else
+    code = $!.is_a?(SystemExit) ? $!.status : 1
+    puts "failure with code #{code}"
+  end
+end
+
+
+
+

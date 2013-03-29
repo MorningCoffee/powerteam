@@ -6,3 +6,7 @@ export USER=$(git config user.name)
 
 ruby powerteam_Ruby_client.rb
 
+echo "Finish shell: " $?
+#echo $?
+
+#--since="yesterday"
