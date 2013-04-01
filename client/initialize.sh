@@ -1,7 +1,9 @@
 #!/bin/bash
 
-#read path to repo in var
-#cp powerteam_Bash_client.sh /etc/cron.d/powerteam_Bash_client.sh
+
+echo 'Insert path to the local reposetory: '
+read repopath
+
 cp powerteam_Ruby_client.rb /etc/cron.d/powerteam_Ruby_client.rb
 
 cd /etc/cron.d/
@@ -16,7 +18,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 echo '#!/bin/bash
 
-cd var
+cd '$repopath'
 
 export LOG=$(git reflog show origin/master --date=local)	#get reflog information
 
