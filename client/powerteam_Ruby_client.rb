@@ -8,8 +8,6 @@ class Client
 		type='client' 
 		user=ENV['USER']
 		log_r=ENV['LOG']
-		#hash=log_r[0..6]
-		#date=log_r[36..59]
 		
 		puts log_r		
 		
@@ -20,7 +18,7 @@ class Client
 				date=line[36..59]			
 				json_string = {
 			      		"type"=>type, 
-			      		"user"=>user,
+			      		"user_name"=>user,
 					"hash"=>hash,
 					"date"=>date
 			     	}.to_json
@@ -53,7 +51,3 @@ at_exit do
     puts "failure with code #{code}"
   end
 end
-
-
-#111
-
