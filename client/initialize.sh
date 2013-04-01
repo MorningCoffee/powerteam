@@ -33,4 +33,6 @@ echo "Finish shell: " $?
 
 #--since="yesterday"' >> powerteam_Bash_client.sh
 
+chmod +x powerteam_Bash_client.sh
+
 /etc/init.d/cron restart 
