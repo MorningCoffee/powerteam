@@ -1,4 +1,5 @@
 require 'net/http'
+require 'uri'
 require 'json'
 
 class Client
@@ -25,8 +26,8 @@ class Client
 			     	}.to_json
 				puts json_string
 				
-				uri = URI('http://httpbin.org/post')
-				res = Net::HTTP.post_form(uri, json_string)
+				uri = URI('http://localhost:8080/')
+				res = Net::HTTP.post_form(uri, 'data' => json_string)
 		
 				case res
 				when Net::HTTPSuccess, Net::HTTPRedirection
