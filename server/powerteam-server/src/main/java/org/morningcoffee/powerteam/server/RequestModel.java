@@ -2,7 +2,7 @@ package org.morningcoffee.powerteam.server;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LogRequest {
+public class RequestModel {
 	@SerializedName("start_time")
 	public long startTime;
 	@SerializedName("end_time")

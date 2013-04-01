@@ -20,7 +20,7 @@ class Client
 				date=line[36..59]			
 				json_string = {
 			      		"type"=>type, 
-			      		"user"=>user,
+			      		"user_name"=>user,
 					"hash"=>hash,
 					"date"=>date
 			     	}.to_json

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Fri Mar 29 21:19:57 EET 2013:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-013d-b797-9366-00000197b5e0 
-on database directory /home/mark/workspace/powerteam/server/powerteam-server/db  with class loader sun.misc.Launcher$AppClassLoader@dc5733 
+Mon Apr 01 17:06:58 EEST 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-013d-c5ec-1dc9-000001964e00 
+on database directory /home/mark/workspace/powerteam/server/powerteam-server/db  with class loader sun.misc.Launcher$AppClassLoader@a6023a 
 Loaded from file:/home/mark/.m2/repository/org/apache/derby/derby/10.9.1.0/derby-10.9.1.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_15-b20
