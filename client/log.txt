@@ -1,2 +1,0 @@
-ab776dc refs/remotes/origin/master@{Mon Mar 25 17:38:17 2013}: update by push
-2e80735 refs/remotes/origin/master@{Mon Mar 25 17:26:29 2013}: pull origin: fast-forward
