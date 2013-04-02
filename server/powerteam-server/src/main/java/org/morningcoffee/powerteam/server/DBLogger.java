@@ -1,7 +1,12 @@
 package org.morningcoffee.powerteam.server;
 
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Connection;
@@ -10,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import com.google.gson.*;
+
 
 public class DBLogger {
 
@@ -70,30 +76,42 @@ public class DBLogger {
 			stmt.execute(sqlReq);
 			stmt.close();
 		} catch (SQLException e) {
-			//System.out.println("\nCannot write log to DB:\n" + sqlReq + "\n");
+			System.out.println("\nCannot write log to DB:\n" + sqlReq + "\n");
 		}
 	}
 
-	public void getLogs() {
+	public List<HashMap<String, String>> getLogs() {
+		List<HashMap<String, String>> tableData = new ArrayList<HashMap<String, String>>();
+		DateFormat df = new SimpleDateFormat("MM.dd.yyyy HH:mm:ss");
+		
 		ResultSet rs = null;
 		String request = "SELECT * FROM APP.CLIENTLOGS LEFT OUTER JOIN APP.PLUGINLOGS "
-				+ "ON (APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) <= 300 AND " 
-				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) > 0";
+				+ "ON (APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) <= 300000 AND " 
+				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) > 0 JOIN APP.USERS "
+				+ "ON APP.CLIENTLOGS.USER_ID = APP.USERS.USER_ID";
 
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(request);
 
 			while (rs.next()) {
-				String data = "";
-				for(int i = 1; i < 10; i++)
-					data += " " + rs.getString(i);
-				System.out.println(data);
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("user_name", rs.getString(11));
+				map.put("push_hash", rs.getString(2));
+				map.put("push_time", df.format(new Date(rs.getLong(3))));
+				if(!rs.getBoolean(9))
+					map.put("test_time", " - ");
+				else map.put("test_time", df.format(new Date(rs.getLong(9))));
+				if(!rs.getBoolean(7))
+					map.put("test_result", " - ");
+				else map.put("test_result", rs.getString(7));
+				tableData.add(map);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
+		return tableData;
 	}
 }
