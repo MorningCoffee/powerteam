@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+Tue Apr 02 17:42:26 EEST 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-013d-cb32-efff-000001487080 
+on database directory /home/mark/workspace/powerteam/server/powerteam-server/db  with class loader RClassLoader 
+Loaded from file:/home/mark/.razorsql/derby/derby10.9.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_15-b03
+user.dir=/home/mark/workspace/powerteam
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
