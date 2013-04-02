@@ -70,15 +70,14 @@ public class DBLogger {
 			stmt.execute(sqlReq);
 			stmt.close();
 		} catch (SQLException e) {
-			System.out.println("\nCannot write log to DB:\n" + sqlReq + "\n");
+			//System.out.println("\nCannot write log to DB:\n" + sqlReq + "\n");
 		}
 	}
 
 	public void getLogs() {
 		ResultSet rs = null;
-		String request = "SELECT * FROM APP.CLIENTLOGS RIGHT OUTER JOIN APP.PLUGINLOGS "
-				+ "ON APP.CLIENTLOGS.USER_ID = APP.PLUGINLOGS.USER_ID "
-				+ "WHERE (APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) <= 300 AND " 
+		String request = "SELECT * FROM APP.CLIENTLOGS LEFT OUTER JOIN APP.PLUGINLOGS "
+				+ "ON (APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) <= 300 AND " 
 				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) > 0";
 
 		try {

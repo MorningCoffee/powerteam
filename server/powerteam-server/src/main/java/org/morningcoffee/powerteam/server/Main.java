@@ -32,7 +32,7 @@ public class Main extends AbstractHandler {
 		} else {
 			baseRequest.setHandled(true);
 
-			System.out.println(data);
+			//System.out.println(data);
 			
 			dbl.addLog(data);
 			// rl.closeConnection();
