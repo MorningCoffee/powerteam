@@ -85,10 +85,22 @@ public class DBLogger {
 		DateFormat df = new SimpleDateFormat("MM.dd.yyyy HH:mm:ss");
 		
 		ResultSet rs = null;
-		String request = "SELECT * FROM APP.CLIENTLOGS LEFT OUTER JOIN APP.PLUGINLOGS "
+		/*String request = "SELECT APP.USERS.USER_NAME, APP.CLIENTLOGS.HASH, APP.CLIENTLOGS.DATE, " 
+				+ "APP.PLUGINLOGS.END_TIME, APP.PLUGINLOGS.TEST_RESULT "
+				+ "FROM APP.CLIENTLOGS LEFT OUTER JOIN APP.PLUGINLOGS "
 				+ "ON (APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) <= 300000 AND " 
 				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) > 0 JOIN APP.USERS "
-				+ "ON APP.CLIENTLOGS.USER_ID = APP.USERS.USER_ID ORDER BY APP.CLIENTLOGS.DATE DESC";
+				+ "ON APP.CLIENTLOGS.USER_ID = APP.USERS.USER_ID ORDER BY APP.CLIENTLOGS.DATE DESC";*/
+		
+		String request = "SELECT APP.USERS.USER_NAME, APP.CLIENTLOGS.HASH, APP.CLIENTLOGS.DATE, " 
+				+ "MAX(APP.PLUGINLOGS.END_TIME) AS EDATE, APP.PLUGINLOGS.TEST_RESULT "
+				+ "FROM APP.CLIENTLOGS LEFT JOIN APP.PLUGINLOGS "
+				+ "ON APP.CLIENTLOGS.USER_ID = APP.PLUGINLOGS.USER_ID AND " 
+				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) <= 300000 AND " 
+				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) > 0 JOIN APP.USERS "
+				+ "ON APP.CLIENTLOGS.USER_ID = APP.USERS.USER_ID "
+				+ "GROUP BY APP.USERS.USER_NAME, APP.CLIENTLOGS.HASH, APP.CLIENTLOGS.DATE, "
+				+ "APP.PLUGINLOGS.TEST_RESULT ORDER BY APP.CLIENTLOGS.DATE DESC";
 
 		try {
 			stmt = conn.createStatement();
@@ -96,17 +108,17 @@ public class DBLogger {
 
 			while (rs.next()) {
 				HashMap<String, String> map = new HashMap<String, String>();
-				map.put("user_name", rs.getString(11));
+				map.put("user_name", rs.getString(1));
 				map.put("push_hash", rs.getString(2));
-				map.put("push_time", df.format(new Date(rs.getLong(3))));
-				if(!rs.getBoolean(9))
+				//map.put("push_time", df.format(new Date(rs.getLong(3))));
+				map.put("push_time", rs.getString(3));
+				if(!rs.getBoolean(4))
 					map.put("test_time", " - ");
-				else map.put("test_time", df.format(new Date(rs.getLong(9))));
-				if(!rs.getBoolean(7))
+				else map.put("test_time", rs.getString(4));
+				if(!rs.getBoolean(5))
 					map.put("test_result", " - ");
-				else map.put("test_result", rs.getString(7));
+				else map.put("test_result", rs.getString(5));
 				tableData.add(map);
-				
 			}
 
 		} catch (SQLException e) {
