@@ -33,30 +33,30 @@ public class Main extends AbstractHandler {
 			PrintWriter page = response.getWriter();
 			
 			page.println("<h1>Powerteam Server</h1>");
-			page.println("<table border=\"1\" cellspacing=\"0\" cellpadding=\"4\">");
+			page.println("<table border='1' cellspacing='0' cellpadding='4'>");
 			page.println("<tr><td><b>USER</b></td><td><b>COMMIT</b></td><td><b>PUSH TIME</b></td>" +
 					"<td><b>TEST TIME</b></td><td><b>TEST RESULT</b></td></tr>");
 			
 			List<HashMap<String, String>> tableData = dbl.getLogs();
-			DateFormat fullDate = new SimpleDateFormat("MM.dd.yyyy");
+			DateFormat fullDate = new SimpleDateFormat("dd.MM.yyyy");
 			DateFormat shortDate = new SimpleDateFormat("HH:mm:ss");
+			
 			long tempDate = Long.MAX_VALUE;
 			for(int i = 0; i < tableData.size(); i++) {
 				HashMap<String, String> map = tableData.get(i);
 				
-				if(tempDate - Long.parseLong(map.get("push_time"), 10) >= 24 * 60 * 60 * 1000 &&
-						tempDate - Long.parseLong(map.get("push_time"), 10) > 0) {
-					page.println("<tr>");
-					page.print("<td collspan='5'>");
+				page.println("<tr>");
+				
+				if(tempDate - Long.parseLong(map.get("push_time"), 10) >= 24 * 60 * 60 * 1000) {
+					
+					page.print("<td colspan='5'>");
 					page.print(fullDate.format(new Date(Long.parseLong(map.get("push_time"), 10))));
 					page.print("</td>");
-					page.println("</tr>");
 					
 					tempDate = Long.parseLong(map.get("push_time"), 10);
+					i--;
 				}
 				else {
-					page.println("<tr>");
-					
 					page.print("<td>");
 					page.print(map.get("user_name"));
 					page.print("</td>");
@@ -64,17 +64,21 @@ public class Main extends AbstractHandler {
 					page.print(map.get("push_hash"));
 					page.print("</td>");
 					page.print("<td>");
-					page.print(map.get("push_time"));
+					page.print(shortDate.format(new Date(Long.parseLong(map.get("push_time"), 10))));
 					page.print("</td>");
 					page.print("<td>");
-					page.print(map.get("test_time"));
+					if(map.get("test_time") != null)
+						page.print(shortDate.format(new Date(Long.parseLong(map.get("test_time"), 10))));
+					else page.print(" - ");
 					page.print("</td>");
 					page.print("<td>");
-					page.print(map.get("test_result"));
+					if(map.get("test_result") != null)
+						page.print(map.get("test_result"));
+					else page.print(" - ");
 					page.print("</td>");
-					
-					page.println("</tr>");
 				}
+				
+				page.println("</tr>");
 			}
 			page.println("</table>");
 

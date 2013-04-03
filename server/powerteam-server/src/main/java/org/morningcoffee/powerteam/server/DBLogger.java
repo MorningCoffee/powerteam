@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Connection;
@@ -82,7 +81,6 @@ public class DBLogger {
 
 	public List<HashMap<String, String>> getLogs() {
 		List<HashMap<String, String>> tableData = new ArrayList<HashMap<String, String>>();
-		DateFormat df = new SimpleDateFormat("MM.dd.yyyy HH:mm:ss");
 		
 		ResultSet rs = null;
 		/*String request = "SELECT APP.USERS.USER_NAME, APP.CLIENTLOGS.HASH, APP.CLIENTLOGS.DATE, " 
@@ -94,7 +92,7 @@ public class DBLogger {
 		
 		String request = "SELECT APP.USERS.USER_NAME, APP.CLIENTLOGS.HASH, APP.CLIENTLOGS.DATE, " 
 				+ "MAX(APP.PLUGINLOGS.END_TIME) AS EDATE, APP.PLUGINLOGS.TEST_RESULT "
-				+ "FROM APP.CLIENTLOGS LEFT JOIN APP.PLUGINLOGS "
+				+ "FROM APP.CLIENTLOGS LEFT OUTER JOIN APP.PLUGINLOGS "
 				+ "ON APP.CLIENTLOGS.USER_ID = APP.PLUGINLOGS.USER_ID AND " 
 				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) <= 300000 AND " 
 				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) > 0 JOIN APP.USERS "
@@ -110,14 +108,9 @@ public class DBLogger {
 				HashMap<String, String> map = new HashMap<String, String>();
 				map.put("user_name", rs.getString(1));
 				map.put("push_hash", rs.getString(2));
-				//map.put("push_time", df.format(new Date(rs.getLong(3))));
 				map.put("push_time", rs.getString(3));
-				if(!rs.getBoolean(4))
-					map.put("test_time", " - ");
-				else map.put("test_time", rs.getString(4));
-				if(!rs.getBoolean(5))
-					map.put("test_result", " - ");
-				else map.put("test_result", rs.getString(5));
+				map.put("test_time", rs.getString(4));
+				map.put("test_result", rs.getString(5));
 				tableData.add(map);
 			}
 
