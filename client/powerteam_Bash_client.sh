@@ -6,13 +6,13 @@
 #read LOG_USER
 #export LOG_USER
 
-#echo "Enter host: "
-#read LOG_HOST
-#export LOG_HOST
+echo "Enter host: "
+read LOG_HOST
+export LOG_HOST
 
-#echo "Enter path to the git repo: "
-#read LOG_GIT_REPO
-#export LOG_GIT_REPO
+echo "Enter path to the git repo: "
+read LOG_GIT_REPO
+export LOG_GIT_REPO
 
 
 #New
