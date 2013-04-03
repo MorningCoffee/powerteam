@@ -40,21 +40,21 @@ public class Main extends AbstractHandler {
 				
 				page.println("<tr>");
 				
-				page.println("<td>");
+				page.print("<td>");
 				page.print(map.get("user_name"));
-				page.println("</td>");
-				page.println("<td>");
+				page.print("</td>");
+				page.print("<td>");
 				page.print(map.get("push_hash"));
-				page.println("</td>");
-				page.println("<td>");
+				page.print("</td>");
+				page.print("<td>");
 				page.print(map.get("push_time"));
-				page.println("</td>");
-				page.println("<td>");
+				page.print("</td>");
+				page.print("<td>");
 				page.print(map.get("test_time"));
-				page.println("</td>");
-				page.println("<td>");
+				page.print("</td>");
+				page.print("<td>");
 				page.print(map.get("test_result"));
-				page.println("</td>");
+				page.print("</td>");
 				
 				page.println("</tr>");
 			}

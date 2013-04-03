@@ -88,7 +88,7 @@ public class DBLogger {
 		String request = "SELECT * FROM APP.CLIENTLOGS LEFT OUTER JOIN APP.PLUGINLOGS "
 				+ "ON (APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) <= 300000 AND " 
 				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) > 0 JOIN APP.USERS "
-				+ "ON APP.CLIENTLOGS.USER_ID = APP.USERS.USER_ID";
+				+ "ON APP.CLIENTLOGS.USER_ID = APP.USERS.USER_ID ORDER BY APP.CLIENTLOGS.DATE DESC";
 
 		try {
 			stmt = conn.createStatement();
@@ -106,6 +106,7 @@ public class DBLogger {
 					map.put("test_result", " - ");
 				else map.put("test_result", rs.getString(7));
 				tableData.add(map);
+				
 			}
 
 		} catch (SQLException e) {
