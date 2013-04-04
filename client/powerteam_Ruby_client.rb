@@ -6,6 +6,10 @@ ERROR_UNKNOWN_HOST = 1
 ERROR_POST_REJECTED = 2
 ERROR_NO_LOCAL_REPO = 3
 
+#test data
+#http://httpbin.org/get
+#/home/ababichok/Documents/powerteam/
+
 class Client	
 
 	def post_json_string		
@@ -13,13 +17,13 @@ class Client
 		type='client' 
 		user=ENV['USER']
 		log_r=ENV['LOG']
-		#log_user=ENV['LOG_USER']
 		log_host=ENV['LOG_HOST']
 		log_repo=ENV['LOG_GIT_REPO']
+	
+		#Show user
 
-#http://httpbin.org/get
-#/home/ababichok/Documents/powerteam/
-		
+		puts "USER:" + user 
+
 		# Check HOST
 		begin
 		uri = URI(log_host)
@@ -48,7 +52,6 @@ class Client
 		
 		log_r.each_line do |line|			
 			if line.include? "update by push"
-				#puts line
 				hash=line[0..6]
 				date=line[36..59]			
 				json_string = {
@@ -57,10 +60,7 @@ class Client
 					"hash"=>hash,
 					"date"=>date
 			     	}.to_json
-				#puts json_string
 
-				#http://localhost:8080/
-				#logrrrr_host='http://localhost:8080/'
 				begin
 					uri = URI(log_host)
 					res = Net::HTTP.post_form(uri, 'data' => json_string)
@@ -69,9 +69,7 @@ class Client
 
 					if res.code == '200'
 						puts "FIND HOST FOR POST. SUCCESS!!!"
-					end
-
-					#puts "\n"				
+					end	
 					
 					Net::HTTPSuccess
 					puts "Completed successfully"
