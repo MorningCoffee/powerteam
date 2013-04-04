@@ -1,3 +1,5 @@
+package org.morningcoffee.powerteam.testproj;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

@@ -11,9 +11,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.eclipse.jetty.server.handler.ContextHandler;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 
 public class Main extends AbstractHandler {
 	
@@ -34,7 +38,7 @@ public class Main extends AbstractHandler {
 			
 			page.println("<h1>Powerteam Server</h1>");
 			page.println("<table border='1' cellspacing='0' cellpadding='4'>");
-			page.println("<tr><td><b>USER</b></td><td><b>COMMIT</b></td><td><b>PUSH TIME</b></td>" +
+			page.println("<tr><td> </td><td><b>USER</b></td><td><b>COMMIT</b></td><td><b>PUSH TIME</b></td>" +
 					"<td><b>TEST TIME</b></td><td><b>TEST RESULT</b></td></tr>");
 			
 			List<HashMap<String, String>> tableData = dbl.getLogs();
@@ -47,7 +51,7 @@ public class Main extends AbstractHandler {
 				
 				if(tempDate - Long.parseLong(map.get("push_time"), 10) >= 24 * 60 * 60 * 1000) {
 					page.println("<tr>");
-					page.print("<td colspan='5'>");
+					page.print("<td colspan='6'>");
 					page.print("<b>" + fullDate.format(new Date(Long.parseLong(map.get("push_time"), 10))) + "</b>");
 					page.print("</td>");
 					page.println("</tr>");
@@ -56,6 +60,10 @@ public class Main extends AbstractHandler {
 				}
 				
 				page.println("<tr>");
+				
+				if(map.get("test_result") == null || map.get("test_result").equals("failed"))
+					page.print("<td><img src='/images/thumbsdown.jpg'/></td>");
+				else page.print("<td><img src='/images/thumbsup.jpg'/></td>");
 				
 				page.print("<td>");
 				page.print(map.get("user_name"));
@@ -72,9 +80,11 @@ public class Main extends AbstractHandler {
 				else page.print(" - ");
 				page.print("</td>");
 				page.print("<td>");
-				if(map.get("test_result") != null)
-					page.print(map.get("test_result"));
-				else page.print(" - ");
+				if(map.get("test_result") == null)
+					page.print(" - ");
+				else if(map.get("test_result").equals("failed"))
+					page.print("<span style='color: #CD2626'>" + map.get("test_result") + "</span>");
+				else page.print("<span style='color: green'>" + map.get("test_result") + "</span>");
 				page.print("</td>");
 				
 				page.println("</tr>");
@@ -95,8 +105,17 @@ public class Main extends AbstractHandler {
 		dbl = new DBLogger();
 		
 		Server server = new Server(8080);
-		server.setHandler(new Main());
-
+		
+        ResourceHandler resHandler = new ResourceHandler();
+        resHandler.setResourceBase(System.getProperty("user.dir") + "/res");
+        ContextHandler ctx = new ContextHandler("/images");
+        ctx.setHandler(resHandler);
+        
+        HandlerList handlers = new HandlerList();
+        handlers.setHandlers(new Handler[] { ctx, new Main() });
+        
+        server.setHandler(handlers);
+        
 		server.start();
 		server.join();
 	}
