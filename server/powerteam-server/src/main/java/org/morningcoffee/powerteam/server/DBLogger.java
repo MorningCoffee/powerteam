@@ -1,6 +1,5 @@
 package org.morningcoffee.powerteam.server;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,6 +7,11 @@ import java.util.List;
 import java.util.Locale;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,22 +19,48 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import com.google.gson.*;
 
-
 public class DBLogger {
 
 	private String dbURL = "jdbc:derby:" + System.getProperty("user.dir")
 			+ "/db;create=true";
+	private String sqlPath = System.getProperty("user.dir") + "/db/dbcreate.sql";
 	private Connection conn = null;
 	private Statement stmt = null;
 
-	public void createConnection() {
+	public void createConnection() throws FileNotFoundException {
 		try {
 			Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
 			conn = DriverManager.getConnection(dbURL, "user", "user");
 		} catch (IllegalAccessException | InstantiationException
 				| ClassNotFoundException | SQLException e) {
 			System.out.println("\nCannot connect to DB\n");
-			System.exit(-1);
+		}
+
+		String s = new String();
+		StringBuffer sb = new StringBuffer();
+
+		try {
+			FileReader fr = new FileReader(new File(sqlPath));
+			BufferedReader br = new BufferedReader(fr);
+
+			while ((s = br.readLine()) != null) {
+				sb.append(s);
+			}
+			br.close();
+
+			String[] inst = sb.toString().split(";");
+
+			stmt = conn.createStatement();
+
+			for (int i = 0; i < inst.length; i++)
+				if (!inst[i].trim().equals("")) {
+					stmt.executeUpdate(inst[i]);
+					System.out.println(">>" + inst[i]);
+				}
+
+		} catch (SQLException | IOException e) {
+			System.err.println("Failed to Execute " + sqlPath
+					+ ". The error is" + e.getMessage());
 		}
 	}
 
@@ -44,7 +74,6 @@ public class DBLogger {
 			}
 		} catch (SQLException e) {
 			System.out.println("\nCannot close connection to DB\n");
-			System.exit(-2);
 		}
 	}
 
@@ -81,20 +110,13 @@ public class DBLogger {
 
 	public List<HashMap<String, String>> getLogs() {
 		List<HashMap<String, String>> tableData = new ArrayList<HashMap<String, String>>();
-		
+
 		ResultSet rs = null;
-		/*String request = "SELECT APP.USERS.USER_NAME, APP.CLIENTLOGS.HASH, APP.CLIENTLOGS.DATE, " 
-				+ "APP.PLUGINLOGS.END_TIME, APP.PLUGINLOGS.TEST_RESULT "
-				+ "FROM APP.CLIENTLOGS LEFT OUTER JOIN APP.PLUGINLOGS "
-				+ "ON (APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) <= 300000 AND " 
-				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) > 0 JOIN APP.USERS "
-				+ "ON APP.CLIENTLOGS.USER_ID = APP.USERS.USER_ID ORDER BY APP.CLIENTLOGS.DATE DESC";*/
-		
-		String request = "SELECT APP.USERS.USER_NAME, APP.CLIENTLOGS.HASH, APP.CLIENTLOGS.DATE, " 
+		String request = "SELECT APP.USERS.USER_NAME, APP.CLIENTLOGS.HASH, APP.CLIENTLOGS.DATE, "
 				+ "MAX(APP.PLUGINLOGS.END_TIME) AS EDATE, APP.PLUGINLOGS.TEST_RESULT "
 				+ "FROM APP.CLIENTLOGS LEFT OUTER JOIN APP.PLUGINLOGS "
-				+ "ON APP.CLIENTLOGS.USER_ID = APP.PLUGINLOGS.USER_ID AND " 
-				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) <= 300000 AND " 
+				+ "ON APP.CLIENTLOGS.USER_ID = APP.PLUGINLOGS.USER_ID AND "
+				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) <= 300000 AND "
 				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) > 0 JOIN APP.USERS "
 				+ "ON APP.CLIENTLOGS.USER_ID = APP.USERS.USER_ID "
 				+ "GROUP BY APP.USERS.USER_NAME, APP.CLIENTLOGS.HASH, APP.CLIENTLOGS.DATE, "

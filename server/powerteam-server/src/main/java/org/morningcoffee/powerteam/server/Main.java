@@ -45,38 +45,37 @@ public class Main extends AbstractHandler {
 			for(int i = 0; i < tableData.size(); i++) {
 				HashMap<String, String> map = tableData.get(i);
 				
-				page.println("<tr>");
-				
 				if(tempDate - Long.parseLong(map.get("push_time"), 10) >= 24 * 60 * 60 * 1000) {
-					
+					page.println("<tr>");
 					page.print("<td colspan='5'>");
-					page.print(fullDate.format(new Date(Long.parseLong(map.get("push_time"), 10))));
+					page.print("<b>" + fullDate.format(new Date(Long.parseLong(map.get("push_time"), 10))) + "</b>");
 					page.print("</td>");
+					page.println("</tr>");
 					
 					tempDate = Long.parseLong(map.get("push_time"), 10);
-					i--;
 				}
-				else {
-					page.print("<td>");
-					page.print(map.get("user_name"));
-					page.print("</td>");
-					page.print("<td>");
-					page.print(map.get("push_hash"));
-					page.print("</td>");
-					page.print("<td>");
-					page.print(shortDate.format(new Date(Long.parseLong(map.get("push_time"), 10))));
-					page.print("</td>");
-					page.print("<td>");
-					if(map.get("test_time") != null)
-						page.print(shortDate.format(new Date(Long.parseLong(map.get("test_time"), 10))));
-					else page.print(" - ");
-					page.print("</td>");
-					page.print("<td>");
-					if(map.get("test_result") != null)
-						page.print(map.get("test_result"));
-					else page.print(" - ");
-					page.print("</td>");
-				}
+				
+				page.println("<tr>");
+				
+				page.print("<td>");
+				page.print(map.get("user_name"));
+				page.print("</td>");
+				page.print("<td>");
+				page.print(map.get("push_hash"));
+				page.print("</td>");
+				page.print("<td>");
+				page.print(shortDate.format(new Date(Long.parseLong(map.get("push_time"), 10))));
+				page.print("</td>");
+				page.print("<td>");
+				if(map.get("test_time") != null)
+					page.print(shortDate.format(new Date(Long.parseLong(map.get("test_time"), 10))));
+				else page.print(" - ");
+				page.print("</td>");
+				page.print("<td>");
+				if(map.get("test_result") != null)
+					page.print(map.get("test_result"));
+				else page.print(" - ");
+				page.print("</td>");
 				
 				page.println("</tr>");
 			}
