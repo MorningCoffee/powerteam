@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -45,18 +46,27 @@ public class Main extends AbstractHandler {
 			DateFormat fullDate = new SimpleDateFormat("dd.MM.yyyy");
 			DateFormat shortDate = new SimpleDateFormat("HH:mm:ss");
 			
-			long tempDate = Long.MAX_VALUE;
+			long prevDate = Long.MAX_VALUE;
+			
 			for(int i = 0; i < tableData.size(); i++) {
 				HashMap<String, String> map = tableData.get(i);
 				
-				if(tempDate - Long.parseLong(map.get("push_time"), 10) >= 24 * 60 * 60 * 1000) {
+				Calendar cal = Calendar.getInstance();
+				cal.setTimeInMillis(Long.parseLong(map.get("push_time"), 10));
+				cal.set(Calendar.HOUR_OF_DAY, 0);
+				cal.set(Calendar.MINUTE, 0);
+				cal.set(Calendar.SECOND, 0);
+				cal.set(Calendar.MILLISECOND, 0);
+				long tempDate = cal.getTimeInMillis();
+				
+				if(prevDate - tempDate >= 24 * 60 * 60 * 1000) {
 					page.println("<tr>");
 					page.print("<td colspan='6'>");
 					page.print("<b>" + fullDate.format(new Date(Long.parseLong(map.get("push_time"), 10))) + "</b>");
 					page.print("</td>");
 					page.println("</tr>");
 					
-					tempDate = Long.parseLong(map.get("push_time"), 10);
+					prevDate = Long.parseLong(map.get("push_time"), 10);
 				}
 				
 				page.println("<tr>");
