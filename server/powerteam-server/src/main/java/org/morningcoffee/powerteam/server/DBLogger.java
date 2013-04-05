@@ -112,13 +112,11 @@ public class DBLogger {
 
 		ResultSet rs = null;
 		String request = "SELECT u.user_name, c.hash, c.push_time, "
-				+ "MAX(p.end_time), p.test_result "
-				+ "FROM powerteam.clientlogs c LEFT OUTER JOIN powerteam.pluginlogs p "
-				+ "ON c.user_id = p.user_id AND "
-				+ "(c.push_time - p.end_time) <= 300000 AND "
-				+ "(c.push_time - p.end_time) > 0 JOIN powerteam.users u "
-				+ "ON c.user_id = u.user_id "
-				+ "GROUP BY c.hash ORDER BY c.push_time DESC";
+				+ "MAX(p.end_time), p.test_result FROM powerteam.clientlogs c "
+				+ "LEFT OUTER JOIN powerteam.pluginlogs p ON c.user_id = p.user_id AND "
+				+ "(c.push_time - p.end_time) <= 300000 AND (c.push_time - p.end_time) > 0 "
+				+ "JOIN powerteam.users u ON c.user_id = u.user_id "
+				+ "GROUP BY c.hash, p.test_result ORDER BY c.push_time DESC";
 
 		try {
 			stmt = conn.createStatement();
