@@ -21,16 +21,15 @@ import com.google.gson.*;
 
 public class DBLogger {
 
-	private String dbURL = "jdbc:derby:" + System.getProperty("user.dir")
-			+ "/db;create=true";
+	private String dbURL = "jdbc:mysql://localhost/";
 	private String sqlPath = System.getProperty("user.dir") + "/db/dbcreate.sql";
 	private Connection conn = null;
 	private Statement stmt = null;
 
 	public void createConnection() throws FileNotFoundException {
 		try {
-			Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-			conn = DriverManager.getConnection(dbURL, "user", "user");
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = DriverManager.getConnection(dbURL, "root", "root");
 		} catch (IllegalAccessException | InstantiationException
 				| ClassNotFoundException | SQLException e) {
 			System.out.println("\nCannot connect to DB\n");
@@ -82,8 +81,8 @@ public class DBLogger {
 		String sqlReq = "";
 		if (rq.type.equals("plugin"))
 			sqlReq = String
-					.format("INSERT INTO APP.PLUGINLOGS (start_time, end_time, test_result, user_id) values "
-							+ "(%d, %d, '%s', (SELECT USER_ID FROM APP.USERS WHERE USER_NAME = '%s'))",
+					.format("INSERT INTO powerteam.pluginlogs (start_time, end_time, test_result, user_id) values "
+							+ "(%d, %d, '%s', (SELECT user_id FROM powerteam.users WHERE user_name = '%s'))",
 							rq.startTime, rq.endTime, rq.testResult,
 							rq.userName);
 		else {
@@ -91,8 +90,8 @@ public class DBLogger {
 				Date date = new SimpleDateFormat("EEE MMM dd H:m:s yyyy",
 						Locale.ENGLISH).parse(rq.date);
 				sqlReq = String
-						.format("INSERT INTO APP.CLIENTLOGS (hash, date, user_id) values ('%s', %d, "
-								+ "(SELECT USER_ID FROM APP.USERS WHERE USER_NAME = '%s'))",
+						.format("INSERT INTO powerteam.clientlogs (hash, push_time, user_id) values ('%s', %d, "
+								+ "(SELECT user_id FROM powerteam.users WHERE user_name = '%s'))",
 								rq.hash, date.getTime(), rq.userName);
 			} catch (ParseException e) {
 				System.out.println("\nCannot convert date: " + rq.date + "\n");
@@ -112,15 +111,12 @@ public class DBLogger {
 		List<HashMap<String, String>> tableData = new ArrayList<HashMap<String, String>>();
 
 		ResultSet rs = null;
-		String request = "SELECT APP.USERS.USER_NAME, APP.CLIENTLOGS.HASH, APP.CLIENTLOGS.DATE, "
-				+ "MAX(APP.PLUGINLOGS.END_TIME), APP.PLUGINLOGS.TEST_RESULT "
-				+ "FROM APP.CLIENTLOGS LEFT OUTER JOIN APP.PLUGINLOGS "
-				+ "ON APP.CLIENTLOGS.USER_ID = APP.PLUGINLOGS.USER_ID AND "
-				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) <= 300000 AND "
-				+ "(APP.CLIENTLOGS.DATE - APP.PLUGINLOGS.END_TIME) > 0 JOIN APP.USERS "
-				+ "ON APP.CLIENTLOGS.USER_ID = APP.USERS.USER_ID "
-				+ "GROUP BY APP.USERS.USER_NAME, APP.CLIENTLOGS.HASH, APP.CLIENTLOGS.DATE, "
-				+ "APP.PLUGINLOGS.TEST_RESULT ORDER BY APP.CLIENTLOGS.DATE DESC";
+		String request = "SELECT u.user_name, c.hash, c.push_time, "
+				+ "MAX(p.end_time), p.test_result FROM powerteam.clientlogs c "
+				+ "LEFT OUTER JOIN powerteam.pluginlogs p ON c.user_id = p.user_id AND "
+				+ "(c.push_time - p.end_time) <= 300000 AND (c.push_time - p.end_time) > 0 "
+				+ "JOIN powerteam.users u ON c.user_id = u.user_id "
+				+ "GROUP BY c.hash, p.test_result ORDER BY c.push_time DESC";
 
 		try {
 			stmt = conn.createStatement();
