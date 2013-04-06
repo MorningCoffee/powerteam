@@ -29,6 +29,9 @@
 				<groupId>org.morningcoffee.powerteam</groupId>
 				<artifactId>powerteam.plugin</artifactId>
 				<version>0.1</version>
+				<configuration>
+					<serverhost>http://localhost:8080</serverhost>
+				</configuration>
 				<executions>
 					<execution>
 						<id>Time</id>

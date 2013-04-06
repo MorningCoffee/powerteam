@@ -14,11 +14,15 @@ import org.w3c.dom.NodeList;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 
 @Mojo(name = "report")
 public class PostTest extends AbstractMojo
 {
+	@Parameter
+	private String serverhost;
+	
     public void execute() throws MojoExecutionException
     {
     	File testResultDir = new File(System.getProperty("user.dir") + "/target/surefire-reports/");
@@ -64,7 +68,7 @@ public class PostTest extends AbstractMojo
 		String data = "data=" + rg.getJSON();	
    	
     	try {
-	        URL url = new URL("http://localhost:8080");
+	        URL url = new URL(serverhost);
 	        URLConnection conn = url.openConnection();
 	        conn.setDoOutput(true);
 	        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());

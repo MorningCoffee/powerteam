@@ -3,6 +3,8 @@ package org.morningcoffee.powerteam.server;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -20,7 +22,7 @@ import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 
-public class Main extends AbstractHandler {
+public class ServerMain extends AbstractHandler {
 	
 	private static DBLogger dbl;
 	
@@ -37,8 +39,8 @@ public class Main extends AbstractHandler {
 			baseRequest.setHandled(true);
 			PrintWriter page = response.getWriter();
 			
-			page.println("<h1>Powerteam Server</h1>");
-			page.println("<table border='1' cellspacing='0' cellpadding='4'>");
+			page.println("<h1 align='center'>Powerteam Server</h1>");
+			page.println("<table border='1' cellspacing='0' cellpadding='4' align='center'>");
 			page.println("<tr><td> </td><td><b>USER</b></td><td><b>COMMIT</b></td><td><b>PUSH TIME</b></td>" +
 					"<td><b>TEST TIME</b></td><td><b>TEST RESULT</b></td></tr>");
 			
@@ -61,9 +63,9 @@ public class Main extends AbstractHandler {
 				
 				if(prevDate - tempDate >= 24 * 60 * 60 * 1000) {
 					page.println("<tr>");
-					page.print("<td colspan='6'>");
-					page.print("<b>" + fullDate.format(new Date(Long.parseLong(map.get("push_time"), 10))) + "</b>");
-					page.print("</td>");
+					page.print("<td colspan='6'><b>");
+					page.print(fullDate.format(new Date(Long.parseLong(map.get("push_time"), 10))));
+					page.print("</b></td>");
 					page.println("</tr>");
 					
 					prevDate = Long.parseLong(map.get("push_time"), 10);
@@ -72,30 +74,20 @@ public class Main extends AbstractHandler {
 				page.println("<tr>");
 				
 				if(map.get("test_result") == null || map.get("test_result").equals("failed"))
-					page.print("<td><img src='/images/thumbsdown.jpg'/></td>");
-				else page.print("<td><img src='/images/thumbsup.jpg'/></td>");
+					page.print("<td> <img src='/images/thumbsdown.jpg'/> </td>");
+				else page.print("<td> <img src='/images/thumbsup.jpg'/> </td>");
 				
-				page.print("<td>");
-				page.print(map.get("user_name"));
-				page.print("</td>");
-				page.print("<td>");
-				page.print(map.get("push_hash"));
-				page.print("</td>");
-				page.print("<td>");
-				page.print(shortDate.format(new Date(Long.parseLong(map.get("push_time"), 10))));
-				page.print("</td>");
-				page.print("<td>");
+				page.print("<td>" + map.get("user_name") + "</td>");
+				page.print("<td>" + map.get("push_hash") + "</td>");
+				page.print("<td>" + shortDate.format(new Date(Long.parseLong(map.get("push_time"), 10))) + "</td>");
 				if(map.get("test_time") != null)
-					page.print(shortDate.format(new Date(Long.parseLong(map.get("test_time"), 10))));
-				else page.print(" - ");
-				page.print("</td>");
-				page.print("<td>");
+					page.print("<td>" + shortDate.format(new Date(Long.parseLong(map.get("test_time"), 10))) + "</td>");
+				else page.print("<td> - </td>");
 				if(map.get("test_result") == null)
-					page.print(" - ");
+					page.print("<td> - </td>");
 				else if(map.get("test_result").equals("failed"))
-					page.print("<span style='color: #CD2626'>" + map.get("test_result") + "</span>");
-				else page.print("<span style='color: green'>" + map.get("test_result") + "</span>");
-				page.print("</td>");
+					page.print("<td> <span style='color: #CD2626'>" + map.get("test_result") + "</span> </td>");
+				else page.print("<td> <span style='color: green'>" + map.get("test_result") + "</span> </td>");
 				
 				page.println("</tr>");
 			}
@@ -117,12 +109,13 @@ public class Main extends AbstractHandler {
 		Server server = new Server(8080);
 		
         ResourceHandler resHandler = new ResourceHandler();
-        resHandler.setResourceBase(System.getProperty("user.dir") + "/res");
+        File jarPath = new File(DBLogger.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        resHandler.setResourceBase(jarPath.getParent() + "/../webres");
         ContextHandler ctx = new ContextHandler("/images");
         ctx.setHandler(resHandler);
         
         HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[] { ctx, new Main() });
+        handlers.setHandlers(new Handler[] { ctx, new ServerMain() });
         
         server.setHandler(handlers);
         

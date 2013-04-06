@@ -5,10 +5,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,19 +19,39 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import com.google.gson.*;
 
 public class DBLogger {
 
-	private String dbURL = "jdbc:mysql://localhost/";
-	private String sqlPath = System.getProperty("user.dir") + "/db/dbcreate.sql";
+	private String dbURL = "jdbc:mysql://";
+	private String dbUserName;
+	private String dbUserPass;
+
+	private File jarPath = new File(DBLogger.class.getProtectionDomain()
+			.getCodeSource().getLocation().getPath());
+	private String sqlPath = jarPath.getParent() + "/../tools/dbcreate.sql";
 	private Connection conn = null;
 	private Statement stmt = null;
+
+	public DBLogger() {
+		Properties prop = new Properties();
+		try {
+			prop.load(new FileInputStream(jarPath.getParent()
+					+ "/../tools/config.properties"));
+			dbURL += prop.getProperty("dbhost");
+			dbUserName = prop.getProperty("dbusername");
+			dbUserPass = prop.getProperty("dbuserpass");
+
+		} catch (IOException ex) {
+			System.out.println("\nCannot get DB configs\n");
+		}
+	}
 
 	public void createConnection() throws FileNotFoundException {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			conn = DriverManager.getConnection(dbURL, "root", "root");
+			conn = DriverManager.getConnection(dbURL, dbUserName, dbUserPass);
 		} catch (IllegalAccessException | InstantiationException
 				| ClassNotFoundException | SQLException e) {
 			System.out.println("\nCannot connect to DB\n");
@@ -68,7 +90,6 @@ public class DBLogger {
 			if (stmt != null)
 				stmt.close();
 			if (conn != null) {
-				DriverManager.getConnection(dbURL + ";shutdown=true");
 				conn.close();
 			}
 		} catch (SQLException e) {
@@ -111,12 +132,17 @@ public class DBLogger {
 		List<HashMap<String, String>> tableData = new ArrayList<HashMap<String, String>>();
 
 		ResultSet rs = null;
-		String request = "SELECT u.user_name, c.hash, c.push_time, "
-				+ "MAX(p.end_time), p.test_result FROM powerteam.clientlogs c "
-				+ "LEFT OUTER JOIN powerteam.pluginlogs p ON c.user_id = p.user_id AND "
-				+ "(c.push_time - p.end_time) <= 300000 AND (c.push_time - p.end_time) > 0 "
+		String request = "SELECT u.user_name, c.hash, c.push_time, p.end_time, p.test_result "
+				+ "FROM powerteam.clientlogs c "
+				+ "LEFT OUTER JOIN powerteam.pluginlogs p ON p.end_time = "
+				+ "(SELECT p2.end_time "
+				+ "FROM powerteam.pluginlogs p2 "
+				+ "WHERE p2.end_time < c.push_time "
+				+ "AND c.push_time - p2.end_time <= 5 * 60 * 1000 "
+				+ "ORDER BY p2.end_time "
+				+ "DESC LIMIT 1) "
 				+ "JOIN powerteam.users u ON c.user_id = u.user_id "
-				+ "GROUP BY c.hash, p.test_result ORDER BY c.push_time DESC";
+				+ "ORDER BY c.push_time DESC";
 
 		try {
 			stmt = conn.createStatement();
