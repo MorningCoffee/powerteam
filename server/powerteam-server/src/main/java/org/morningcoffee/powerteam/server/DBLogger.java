@@ -46,19 +46,10 @@ public class DBLogger {
 		} catch (IOException ex) {
 			System.out.println("\nCannot get DB configs\n");
 		}
-	}
-
-	public void createConnection() throws FileNotFoundException {
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			conn = DriverManager.getConnection(dbURL, dbUserName, dbUserPass);
-		} catch (IllegalAccessException | InstantiationException
-				| ClassNotFoundException | SQLException e) {
-			System.out.println("\nCannot connect to DB\n");
-		}
-
+		
 		String s = new String();
 		StringBuffer sb = new StringBuffer();
+		String[] inst = null;
 
 		try {
 			FileReader fr = new FileReader(new File(sqlPath));
@@ -69,19 +60,34 @@ public class DBLogger {
 			}
 			br.close();
 
-			String[] inst = sb.toString().split(";");
+			inst = sb.toString().split(";");
+		} catch (IOException e) {
+			System.err.println("Failed to read: " + sqlPath + " Error: "
+					+ e.getMessage());
+		}
 
-			stmt = conn.createStatement();
-
-			for (int i = 0; i < inst.length; i++)
+		for (int i = 0; i < inst.length; i++) {
+			try {
+				this.createConnection();
+				stmt = conn.createStatement();
 				if (!inst[i].trim().equals("")) {
 					stmt.executeUpdate(inst[i]);
 					System.out.println(">>" + inst[i]);
 				}
+			} catch (SQLException | FileNotFoundException e) {
+				System.err.println("Failed to execute: " + sqlPath + " Error: "
+						+ e.getMessage());
+			}
+		}
+	}
 
-		} catch (SQLException | IOException e) {
-			System.err.println("Failed to Execute " + sqlPath
-					+ ". The error is" + e.getMessage());
+	public void createConnection() throws FileNotFoundException {
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = DriverManager.getConnection(dbURL, dbUserName, dbUserPass);
+		} catch (IllegalAccessException | InstantiationException
+				| ClassNotFoundException | SQLException e) {
+			System.out.println("\nCannot connect to DB\n");
 		}
 	}
 
