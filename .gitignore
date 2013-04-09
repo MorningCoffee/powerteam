@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.gem
 *.rbc
 .bundle
@@ -17,3 +18,7 @@ tmp
 .yardoc
 _yardoc
 doc/
+=======
+.directory
+*.*~
+>>>>>>> 8259650397b6924ebc458e85eb20dd380fcffd7a
