@@ -1,0 +1,19 @@
+%html
+  %head
+    %title Discovery web-interface
+    :javascript
+      function timedRefresh(timeoutPeriod) {
+        setTimeout("location.reload(true);", timeoutPeriod);
+      }
+
+  %body{:onload=>"timedRefresh(1000)"}
+    #container{:style=>"width: 700px; margin: 0 auto;"}
+      #message <!--@mess-->
+      .key{:style=>"width: 100px; float: left;"} Name:
+      .value{:style=>"width: 600px; float: left;"} <!--@name-->
+      .key{:style=>"width: 100px; float: left;"} State:
+      .value{:style=>"width: 600px; float: left;"} <!--@state-->
+      .key{:style=>"width: 100px; float: left;"} Complete:
+      .value{:style=>"width: 600px; float: left;"} <!--@complete-->
+      .key{:style=>"width: 100px; float: left;"} Time:
+      .value{:style=>"width: 600px; float: left;"} <!--@time-->
