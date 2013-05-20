@@ -125,7 +125,7 @@ public class DBLogger {
 				System.out.println("\nCannot convert date: " + rq.date + "\n");
 			}
 		}
-		
+	
 		try {
 			stmt = conn.createStatement();
 			stmt.execute(sqlReq);
