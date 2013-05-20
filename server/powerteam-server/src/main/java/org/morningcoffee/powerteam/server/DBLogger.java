@@ -74,6 +74,7 @@ public class DBLogger {
 					stmt.executeUpdate(inst[i]);
 					System.out.println(">>" + inst[i]);
 				}
+				this.closeConnection();
 			} catch (SQLException | FileNotFoundException e) {
 				System.err.println("Failed to execute: " + sqlPath + " Error: "
 						+ e.getMessage());

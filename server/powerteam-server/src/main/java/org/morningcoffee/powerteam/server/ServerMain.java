@@ -98,9 +98,9 @@ public class ServerMain extends AbstractHandler {
 
 			System.out.println(data);
 			dbl.addLog(data);
-			
-			// rl.closeConnection();
 		}
+		
+		dbl.closeConnection();
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -111,11 +111,11 @@ public class ServerMain extends AbstractHandler {
         ResourceHandler resHandler = new ResourceHandler();
         File jarPath = new File(DBLogger.class.getProtectionDomain().getCodeSource().getLocation().getPath());
         resHandler.setResourceBase(jarPath.getParent() + "/../webres");
-        ContextHandler ctx = new ContextHandler("/images");
-        ctx.setHandler(resHandler);
+        ContextHandler conth = new ContextHandler("/images");
+        conth.setHandler(resHandler);
         
         HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[] { ctx, new ServerMain() });
+        handlers.setHandlers(new Handler[] { conth, new ServerMain() });
         
         server.setHandler(handlers);
         
