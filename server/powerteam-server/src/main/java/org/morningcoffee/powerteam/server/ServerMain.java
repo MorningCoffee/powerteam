@@ -14,13 +14,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.eclipse.jetty.server.Handler;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.Request;
-import org.eclipse.jetty.server.handler.AbstractHandler;
-import org.eclipse.jetty.server.handler.ContextHandler;
-import org.eclipse.jetty.server.handler.HandlerList;
-import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.mortbay.jetty.*;
+import org.mortbay.jetty.handler.*;
 
 public class ServerMain extends AbstractHandler {
 	
@@ -121,5 +116,13 @@ public class ServerMain extends AbstractHandler {
         
 		server.start();
 		server.join();
+	}
+
+	@Override
+	public void handle(String arg0, HttpServletRequest arg1,
+			HttpServletResponse arg2, int arg3) throws IOException,
+			ServletException {
+		// TODO Auto-generated method stub
+		
 	}
 }
