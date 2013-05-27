@@ -27,7 +27,7 @@ public class ServerMain extends AbstractHandler {
 		
 		dbl.createConnection();
 		String data = request.getParameter("data");
-
+		
 		if (data == null) {
 			response.setContentType("text/html;charset=utf-8");
 			response.setStatus(HttpServletResponse.SC_OK);
