@@ -92,7 +92,7 @@ DBLogger = Class.new do
 		sqlReq = ""
 		if parsed["type"] == "plugin" 
 			sqlReq = "INSERT INTO powerteam.pluginlogs (start_time, end_time, test_result, user_id) values " +
-					"(#{parsed['start_time']}, #{parsed['end_time']}, '#{parsed['test_result']}', " +
+					"(#{parsed['start_time']}, #{parsed['end_time'] * 1000}, '#{parsed['test_result']}', " +
 					"(SELECT user_id FROM powerteam.users WHERE user_name = '#{parsed['user_name']}'))"
 		else
 			date = DateTime.strptime(parsed["date"], "%a %b %d %H:%M:%S %Y").to_time.to_i * 1000
