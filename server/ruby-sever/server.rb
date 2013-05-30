@@ -18,7 +18,7 @@ get '/' do
 	prevDate = 9223372036854775807
 
 	logs.each do |log|
-		tempDate = DateTime.strptime(log["push_time"], '%s').to_date.to_time.to_i
+		tempDate = log["push_time"].to_i
 
 		if prevDate - tempDate >= 24 * 60 * 60 * 1000
 			date = DateTime.strptime((log["push_time"].to_i / 1000.0).to_s, '%s')
@@ -95,7 +95,7 @@ DBLogger = Class.new do
 					"(#{parsed['start_time']}, #{parsed['end_time']}, '#{parsed['test_result']}', " +
 					"(SELECT user_id FROM powerteam.users WHERE user_name = '#{parsed['user_name']}'))"
 		else
-			date = DateTime.strptime(parsed["date"], "%a %b %d %H:%M:%S %Y").to_i
+			date = DateTime.strptime(parsed["date"], "%a %b %d %H:%M:%S %Y").utc.to_time.to_i * 1000
 			sqlReq = "INSERT INTO powerteam.clientlogs (hash, push_time, user_id) values ('#{parsed['hash']}', " +
 					"#{date}, (SELECT user_id FROM powerteam.users WHERE user_name = '#{parsed['user_name']}'))"
 		end
