@@ -41,7 +41,7 @@ get '/' do
 		page += "<td>" + date.strftime("%H:%M:%S")  + "</td>"
 		
 		if(log["test_time"] != nil)
-			date = DateTime.strptime((log["push_time"].to_i / 1000.0).to_s, '%s')
+			date = DateTime.strptime((log["test_time"].to_i / 1000.0).to_s, '%s')
 			page += "<td>" + date.strftime("%H:%M:%S") + "</td>"
 		else 
 			page += "<td> - </td>"
@@ -92,10 +92,10 @@ DBLogger = Class.new do
 		sqlReq = ""
 		if parsed["type"] == "plugin" 
 			sqlReq = "INSERT INTO powerteam.pluginlogs (start_time, end_time, test_result, user_id) values " +
-					"(#{parsed['start_time']}, #{parsed['end_time'] * 1000}, '#{parsed['test_result']}', " +
+					"(#{parsed['start_time']}, #{parsed['end_time']}, '#{parsed['test_result']}', " +
 					"(SELECT user_id FROM powerteam.users WHERE user_name = '#{parsed['user_name']}'))"
 		else
-			date = DateTime.strptime(parsed["date"], "%a %b %d %H:%M:%S %Y").to_time.to_i * 1000
+			date = DateTime.strptime(parsed["date"], "%a %b %d %H:%M:%S %Y").to_i
 			sqlReq = "INSERT INTO powerteam.clientlogs (hash, push_time, user_id) values ('#{parsed['hash']}', " +
 					"#{date}, (SELECT user_id FROM powerteam.users WHERE user_name = '#{parsed['user_name']}'))"
 		end
@@ -122,6 +122,7 @@ DBLogger = Class.new do
 				"DESC LIMIT 1) " + 
 				"JOIN powerteam.users u ON c.user_id = u.user_id " +
 				"ORDER BY c.push_time DESC"
+		puts request
 		begin
 			rs = @con.query(request)
 
