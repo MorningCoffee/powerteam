@@ -95,8 +95,7 @@ DBLogger = Class.new do
 					"(#{parsed['start_time']}, #{parsed['end_time']}, '#{parsed['test_result']}', " +
 					"(SELECT user_id FROM powerteam.users WHERE user_name = '#{parsed['user_name']}'))"
 		else
-			dateTemp = DateTime.strptime(parsed["date"], "%a %b %d %H:%M:%S %Y")
-			date = dateTemp.new_offset(0).to_time.localtime.to_i * 1000
+			date = DateTime.strptime(parsed["date"] + " UTC", "%a %b %d %H:%M:%S %Y %Z").to_time.localtime.to_i * 1000
 			sqlReq = "INSERT INTO powerteam.clientlogs (hash, push_time, user_id) values ('#{parsed['hash']}', " +
 					"#{date}, (SELECT user_id FROM powerteam.users WHERE user_name = '#{parsed['user_name']}'))"
 		end
