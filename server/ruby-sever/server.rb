@@ -96,7 +96,7 @@ DBLogger = Class.new do
 					"(SELECT user_id FROM powerteam.users WHERE user_name = '#{parsed['user_name']}'))"
 		else
 			time = DateTime.strptime(parsed["date"], "%a %b %d %H:%M:%S %Y").to_time
-			time += time.gmt_offset 
+			puts "---------------------------------" + time.gmt_offset.to_s
 			date = time.to_i * 1000
 			sqlReq = "INSERT INTO powerteam.clientlogs (hash, push_time, user_id) values ('#{parsed['hash']}', " +
 					"#{date}, (SELECT user_id FROM powerteam.users WHERE user_name = '#{parsed['user_name']}'))"
