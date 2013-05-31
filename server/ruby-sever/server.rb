@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'mysql'
 require 'json'
+require 'debugger'
 
 
 get '/' do
@@ -96,7 +97,6 @@ DBLogger = Class.new do
 					"(SELECT user_id FROM powerteam.users WHERE user_name = '#{parsed['user_name']}'))"
 		else
 			time = DateTime.strptime(parsed["date"], "%a %b %d %H:%M:%S %Y").to_time
-			#debugger
 			date = (time.to_i + time.gmt_offset) * 1000
 			sqlReq = "INSERT INTO powerteam.clientlogs (hash, push_time, user_id) values ('#{parsed['hash']}', " +
 					"#{date}, (SELECT user_id FROM powerteam.users WHERE user_name = '#{parsed['user_name']}'))"
