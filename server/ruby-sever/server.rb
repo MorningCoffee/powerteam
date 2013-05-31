@@ -17,9 +17,10 @@ get '/' do
 	db.closeConnection()
 
 	prevDate = 9223372036854775807
+	timeOffset = DateTime.now.to_time.gmt_offset
 
 	logs.each do |log|
-		tempDate = log["push_time"].to_i
+		tempDate = DateTime.strptime(log["push_time"], '%s').to_date.to_time.to_i
 
 		if prevDate - tempDate >= 24 * 60 * 60 * 1000
 			date = DateTime.strptime((log["push_time"].to_i / 1000.0).to_s, '%s')
@@ -38,11 +39,11 @@ get '/' do
 
 		page += "<td>#{log['user_name']}</td>"
 		page += "<td>#{log['push_hash']}</td>"
-		date = DateTime.strptime((log["push_time"].to_i / 1000.0).to_s, '%s')
+		date = DateTime.strptime((log["push_time"].to_i / 1000.0 + timeOffset).to_s, '%s')
 		page += "<td>" + date.strftime("%H:%M:%S")  + "</td>"
 		
 		if(log["test_time"] != nil)
-			date = DateTime.strptime((log["test_time"].to_i / 1000.0).to_s, '%s')
+			date = DateTime.strptime((log["test_time"].to_i / 1000.0 + timeOffset).to_s, '%s')
 			page += "<td>" + date.strftime("%H:%M:%S") + "</td>"
 		else 
 			page += "<td> - </td>"
