@@ -1,0 +1,353 @@
+[2013-06-03 17:11:54] INFO  WEBrick 1.3.1
+[2013-06-03 17:11:54] INFO  ruby 1.9.3 (2012-04-20) [i686-linux]
+== Sinatra/1.4.2 has taken the stage on 4567 for development with backup from WEBrick
+[2013-06-03 17:11:54] INFO  WEBrick::HTTPServer#start: pid=9916 port=4567
+127.0.0.1 - - [03/Jun/2013 17:12:01] "GET /new HTTP/1.1" 404 440 0.0011
+localhost - - [03/Jun/2013:17:12:01 EEST] "GET /new HTTP/1.1" 404 440
+- -> /new
+Errno::ENOENT - No such file or directory - tools/dbcreate.sql:
+	server.rb:87:in `initialize'
+	server.rb:87:in `open'
+	server.rb:87:in `createConnection'
+	server.rb:71:in `block in <main>'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1415:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1415:in `block in compile!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `[]'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `block (3 levels) in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:960:in `route_eval'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `block (2 levels) in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:981:in `block in process_route'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:979:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:979:in `process_route'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:943:in `block in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:942:in `each'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:942:in `route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1053:in `block in dispatch!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `block in invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1050:in `dispatch!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:878:in `block in call!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `block in invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:878:in `call!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:864:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/xss_header.rb:18:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/path_traversal.rb:16:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/json_csrf.rb:18:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/base.rb:49:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/base.rb:49:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/frame_options.rb:31:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/logger.rb:15:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/commonlogger.rb:33:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:209:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:202:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/head.rb:11:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/methodoverride.rb:21:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/showexceptions.rb:21:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:172:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1947:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1610:in `block in call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1693:in `synchronize'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1610:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/handler/webrick.rb:60:in `service'
+	/usr/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+	/usr/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+	/usr/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+localhost - - [03/Jun/2013:17:12:01 EEST] "POST /new HTTP/1.1" 500 137104
+- -> /new
+127.0.0.1 - - [03/Jun/2013 17:12:01] "GET /new HTTP/1.1" 404 440 0.0010
+localhost - - [03/Jun/2013:17:12:01 EEST] "GET /new HTTP/1.1" 404 440
+- -> /new
+Errno::ENOENT - No such file or directory - tools/dbcreate.sql:
+	server.rb:87:in `initialize'
+	server.rb:87:in `open'
+	server.rb:87:in `createConnection'
+	server.rb:15:in `block in <main>'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1415:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1415:in `block in compile!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `[]'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `block (3 levels) in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:960:in `route_eval'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `block (2 levels) in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:981:in `block in process_route'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:979:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:979:in `process_route'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:943:in `block in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:942:in `each'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:942:in `route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1053:in `block in dispatch!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `block in invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1050:in `dispatch!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:878:in `block in call!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `block in invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:878:in `call!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:864:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/xss_header.rb:18:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/path_traversal.rb:16:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/json_csrf.rb:18:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/base.rb:49:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/base.rb:49:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/frame_options.rb:31:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/logger.rb:15:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/commonlogger.rb:33:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:209:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:202:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/head.rb:11:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/methodoverride.rb:21:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/showexceptions.rb:21:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:172:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1947:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1610:in `block in call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1693:in `synchronize'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1610:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/handler/webrick.rb:60:in `service'
+	/usr/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+	/usr/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+	/usr/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+localhost - - [03/Jun/2013:17:12:06 EEST] "GET / HTTP/1.1" 500 137118
+- -> /
+127.0.0.1 - - [03/Jun/2013 17:12:08] "GET /__sinatra__/500.png HTTP/1.1" 200 - 0.1798
+localhost - - [03/Jun/2013:17:12:08 EEST] "GET /__sinatra__/500.png HTTP/1.1" 200 31056
+http://localhost:4567/ -> /__sinatra__/500.png
+127.0.0.1 - - [03/Jun/2013 17:13:02] "GET /new HTTP/1.1" 404 440 0.0010
+localhost - - [03/Jun/2013:17:13:02 EEST] "GET /new HTTP/1.1" 404 440
+- -> /new
+Errno::ENOENT - No such file or directory - tools/dbcreate.sql:
+	server.rb:87:in `initialize'
+	server.rb:87:in `open'
+	server.rb:87:in `createConnection'
+	server.rb:71:in `block in <main>'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1415:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1415:in `block in compile!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `[]'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `block (3 levels) in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:960:in `route_eval'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `block (2 levels) in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:981:in `block in process_route'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:979:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:979:in `process_route'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:943:in `block in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:942:in `each'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:942:in `route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1053:in `block in dispatch!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `block in invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1050:in `dispatch!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:878:in `block in call!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `block in invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:878:in `call!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:864:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/xss_header.rb:18:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/path_traversal.rb:16:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/json_csrf.rb:18:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/base.rb:49:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/base.rb:49:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/frame_options.rb:31:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/logger.rb:15:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/commonlogger.rb:33:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:209:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:202:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/head.rb:11:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/methodoverride.rb:21:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/showexceptions.rb:21:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:172:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1947:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1610:in `block in call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1693:in `synchronize'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1610:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/handler/webrick.rb:60:in `service'
+	/usr/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+	/usr/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+	/usr/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+localhost - - [03/Jun/2013:17:13:02 EEST] "POST /new HTTP/1.1" 500 137078
+- -> /new
+127.0.0.1 - - [03/Jun/2013 17:13:02] "GET /new HTTP/1.1" 404 440 0.0010
+localhost - - [03/Jun/2013:17:13:02 EEST] "GET /new HTTP/1.1" 404 440
+- -> /new
+[2013-06-03 17:13:15] INFO  WEBrick 1.3.1
+[2013-06-03 17:13:15] INFO  ruby 1.9.3 (2012-04-20) [i686-linux]
+[2013-06-03 17:13:15] WARN  TCPServer Error: Address already in use - bind(2)
+== Someone is already performing on port 4567!
+Errno::ENOENT - No such file or directory - tools/dbcreate.sql:
+	server.rb:87:in `initialize'
+	server.rb:87:in `open'
+	server.rb:87:in `createConnection'
+	server.rb:15:in `block in <main>'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1415:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1415:in `block in compile!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `[]'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `block (3 levels) in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:960:in `route_eval'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `block (2 levels) in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:981:in `block in process_route'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:979:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:979:in `process_route'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:943:in `block in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:942:in `each'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:942:in `route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1053:in `block in dispatch!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `block in invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1050:in `dispatch!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:878:in `block in call!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `block in invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:878:in `call!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:864:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/xss_header.rb:18:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/path_traversal.rb:16:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/json_csrf.rb:18:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/base.rb:49:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/base.rb:49:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/frame_options.rb:31:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/logger.rb:15:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/commonlogger.rb:33:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:209:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:202:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/head.rb:11:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/methodoverride.rb:21:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/showexceptions.rb:21:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:172:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1947:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1610:in `block in call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1693:in `synchronize'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1610:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/handler/webrick.rb:60:in `service'
+	/usr/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+	/usr/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+	/usr/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+localhost - - [03/Jun/2013:17:13:31 EEST] "GET / HTTP/1.1" 500 137085
+- -> /
+127.0.0.1 - - [03/Jun/2013 17:13:32] "GET /__sinatra__/500.png HTTP/1.1" 200 - 0.0009
+localhost - - [03/Jun/2013:17:13:32 EEST] "GET /__sinatra__/500.png HTTP/1.1" 200 31056
+http://localhost:4567/ -> /__sinatra__/500.png
+127.0.0.1 - - [03/Jun/2013 17:14:01] "GET /new HTTP/1.1" 404 440 0.0008
+localhost - - [03/Jun/2013:17:14:01 EEST] "GET /new HTTP/1.1" 404 440
+Errno::ENOENT - No such file or directory - tools/dbcreate.sql:
+	server.rb:87:in `initialize'
+	server.rb:87:in `open'
+	server.rb:87:in `createConnection'
+	server.rb:71:in `block in <main>'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1415:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1415:in `block in compile!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `[]'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `block (3 levels) in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:960:in `route_eval'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:944:in `block (2 levels) in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:981:in `block in process_route'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:979:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:979:in `process_route'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:943:in `block in route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:942:in `each'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:942:in `route!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1053:in `block in dispatch!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `block in invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1050:in `dispatch!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:878:in `block in call!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `block in invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `catch'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1035:in `invoke'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:878:in `call!'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:864:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/xss_header.rb:18:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/path_traversal.rb:16:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/json_csrf.rb:18:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/base.rb:49:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/base.rb:49:in `call'
+	/var/lib/gems/1.9.1/gems/rack-protection-1.5.0/lib/rack/protection/frame_options.rb:31:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/logger.rb:15:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/commonlogger.rb:33:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:209:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:202:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/head.rb:11:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/methodoverride.rb:21:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/showexceptions.rb:21:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:172:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1947:in `call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1610:in `block in call'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1693:in `synchronize'
+	/var/lib/gems/1.9.1/gems/sinatra-1.4.2/lib/sinatra/base.rb:1610:in `call'
+	/var/lib/gems/1.9.1/gems/rack-1.5.2/lib/rack/handler/webrick.rb:60:in `service'
+	/usr/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+	/usr/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+	/usr/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'- -> /new
+
+localhost - - [03/Jun/2013:17:14:01 EEST] "POST /new HTTP/1.1" 500 137071
+- -> /new
+127.0.0.1 - - [03/Jun/2013 17:14:01] "GET /new HTTP/1.1" 404 440 0.0011
+localhost - - [03/Jun/2013:17:14:01 EEST] "GET /new HTTP/1.1" 404 440
+- -> /new
+
+== Sinatra has ended his set (crowd applauds)
+[2013-06-03 17:14:03] INFO  going to shutdown ...
+[2013-06-03 17:14:03] INFO  WEBrick::HTTPServer#start done.
+[2013-06-03 17:14:19] INFO  WEBrick 1.3.1
+[2013-06-03 17:14:19] INFO  ruby 1.9.3 (2012-04-20) [i686-linux]
+== Sinatra/1.4.2 has taken the stage on 4567 for development with backup from WEBrick
+[2013-06-03 17:14:19] INFO  WEBrick::HTTPServer#start: pid=10012 port=4567
+127.0.0.1 - - [03/Jun/2013 17:14:23] "GET / HTTP/1.1" 200 9670 0.3823
+localhost - - [03/Jun/2013:17:14:22 EEST] "GET / HTTP/1.1" 200 9670
+- -> /
+127.0.0.1 - - [03/Jun/2013 17:14:23] "GET /thumbsdown.jpg HTTP/1.1" 304 - 0.0022
+[2013-06-03 17:14:23] WARN  Could not determine content-length of response body. Set content-length of the response or set Response#chunked = true
+localhost - - [03/Jun/2013:17:14:23 EEST] "GET /thumbsdown.jpg HTTP/1.1" 304 0
+http://localhost:4567/ -> /thumbsdown.jpg
+127.0.0.1 - - [03/Jun/2013 17:14:23] "GET /thumbsup.jpg HTTP/1.1" 304 - 0.0006
+[2013-06-03 17:14:23] WARN  Could not determine content-length of response body. Set content-length of the response or set Response#chunked = true
+localhost - - [03/Jun/2013:17:14:23 EEST] "GET /thumbsup.jpg HTTP/1.1" 304 0
+http://localhost:4567/ -> /thumbsup.jpg
+127.0.0.1 - - [03/Jun/2013 17:15:01] "GET /new HTTP/1.1" 404 440 0.0008
+localhost - - [03/Jun/2013:17:15:01 EEST] "GET /new HTTP/1.1" 404 440
+- -> /new
+127.0.0.1 - - [03/Jun/2013 17:15:01] "POST /new HTTP/1.1" 200 - 0.2352
+localhost - - [03/Jun/2013:17:15:01 EEST] "POST /new HTTP/1.1" 200 0
+- -> /new
+127.0.0.1 - - [03/Jun/2013 17:15:01] "GET /new HTTP/1.1" 404 440 0.0010
+localhost - - [03/Jun/2013:17:15:01 EEST] "GET /new HTTP/1.1" 404 440
+- -> /new
+
+== Sinatra has ended his set (crowd applauds)
+[2013-06-03 17:15:29] INFO  going to shutdown ...
+[2013-06-03 17:15:29] INFO  WEBrick::HTTPServer#start done.
+1061
+Duplicate key name 'uniq_hash'
+1061
+Duplicate key name 'uniq_hash'
+{"type":"client","user_name":"Markiyan Matviyiv","hash":"03ba570","date":"Mon Jun 3 16:53:27 2013}"}
+1062
+Duplicate entry '03ba570' for key 'uniq_hash'
+[2013-06-03 17:15:53] INFO  WEBrick 1.3.1
+[2013-06-03 17:15:53] INFO  ruby 1.9.3 (2012-04-20) [i686-linux]
+== Sinatra/1.4.2 has taken the stage on 4567 for development with backup from WEBrick
+[2013-06-03 17:15:53] INFO  WEBrick::HTTPServer#start: pid=10118 port=4567
+127.0.0.1 - - [03/Jun/2013 17:15:59] "GET / HTTP/1.1" 200 9670 0.1823
+localhost - - [03/Jun/2013:17:15:58 EEST] "GET / HTTP/1.1" 200 9670
+- -> /
+127.0.0.1 - - [03/Jun/2013 17:15:59] "GET /thumbsdown.jpg HTTP/1.1" 200 - 0.0439
+127.0.0.1 - - [03/Jun/2013 17:15:59] "GET /thumbsup.jpg HTTP/1.1" 200 - 0.0382
+localhost - - [03/Jun/2013:17:15:59 EEST] "GET /thumbsup.jpg HTTP/1.1" 200 1844
+http://localhost:4567/ -> /thumbsup.jpg
+localhost - - [03/Jun/2013:17:15:59 EEST] "GET /thumbsdown.jpg HTTP/1.1" 200 1962
+http://localhost:4567/ -> /thumbsdown.jpg
+127.0.0.1 - - [03/Jun/2013 17:16:01] "GET /new HTTP/1.1" 404 440 0.0009
+localhost - - [03/Jun/2013:17:16:01 EEST] "GET /new HTTP/1.1" 404 440
+- -> /new
+127.0.0.1 - - [03/Jun/2013 17:16:02] "POST /new HTTP/1.1" 200 - 0.1279
+localhost - - [03/Jun/2013:17:16:01 EEST] "POST /new HTTP/1.1" 200 0
+- -> /new
+127.0.0.1 - - [03/Jun/2013 17:16:02] "GET /new HTTP/1.1" 404 440 0.0010
+localhost - - [03/Jun/2013:17:16:02 EEST] "GET /new HTTP/1.1" 404 440
+- -> /new

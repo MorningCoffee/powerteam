@@ -1,8 +1,8 @@
 require 'sinatra'
 require 'mysql'
 require 'json'
-require 'debugger'
 
+load "config.rb"
 
 get '/' do
 	db = DBLogger.new
@@ -84,7 +84,7 @@ DBLogger = Class.new do
 			@con = Mysql.new('localhost', 'root', 'root', 'powerteam')
 
 			tempQuery = ""
-			File.open("tools/dbcreate.sql", "r").each_line do |line|
+			File.open("dbcreate.sql", "r").each_line do |line|
 				tempQuery += line
 
 				if line.index(';') != nil
