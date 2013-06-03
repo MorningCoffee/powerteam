@@ -81,7 +81,7 @@ DBLogger = Class.new do
 
 	def createConnection()
 		begin
-			@con = Mysql.new('localhost', 'root', 'root', 'powerteam')
+			@con = Mysql.new(DB_HOST, DB_USERNAME, DB_USERPASS, DB_NAME)
 
 			tempQuery = ""
 			File.open("dbcreate.sql", "r").each_line do |line|
