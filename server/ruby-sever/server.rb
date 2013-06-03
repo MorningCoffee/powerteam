@@ -80,11 +80,31 @@ DBLogger = Class.new do
 	@con = nil
 
 	def createConnection()
-		@con = Mysql.new('localhost', 'root', 'root', 'powerteam')
+		begin
+			@con = Mysql.new('localhost', 'root', 'root', 'powerteam')
+
+			tempQuery = ""
+			File.open("tools/dbcreate.sql", "r").each_line do |line|
+				tempQuery += line
+
+				if line.index(';') != nil
+					@con.query(tempQuery)
+					tempQuery = ""
+				end
+			end
+		rescue Mysql::Error => e
+			puts e.errno
+			puts e.error
+		end
 	end
 
 	def closeConnection()
-		@con.close
+		begin
+			@con.close
+		rescue Mysql::Error => e
+			puts e.errno
+			puts e.error
+		end
 	end
 
 	def addLog(data)
@@ -125,7 +145,7 @@ DBLogger = Class.new do
 				"DESC LIMIT 1) " + 
 				"JOIN powerteam.users u ON c.user_id = u.user_id " +
 				"ORDER BY c.push_time DESC"
-		puts request
+
 		begin
 			rs = @con.query(request)
 
