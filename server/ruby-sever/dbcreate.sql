@@ -28,4 +28,4 @@ CREATE TABLE IF NOT EXISTS powerteam.users (
 CREATE UNIQUE INDEX uniq_name ON powerteam.users (user_name);
 
 INSERT INTO powerteam.users(user_name) VALUES ('Markiyan Matviyiv');
-INSERT INTO powerteam.users(user_name) VALUES ('Babichok');
+INSERT INTO powerteam.users(user_name) VALUES ('osklyarenko');
