@@ -56,7 +56,7 @@ public class PostTest extends AbstractMojo {
 					if (!testsFailures.equals("0") || !testsErrors.equals("0"))
 						testResult = "failed";
 				}
-
+				
 				testFile.delete();
 			}
 		}
