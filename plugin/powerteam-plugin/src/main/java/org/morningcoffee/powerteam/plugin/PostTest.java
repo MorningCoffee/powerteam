@@ -50,12 +50,14 @@ public class PostTest extends AbstractMojo {
 					NamedNodeMap testAttributes = nodes.item(j).getAttributes();
 					String testsFailures = testAttributes.getNamedItem(
 							"failures").getNodeValue();
+					String testsErrors = testAttributes.getNamedItem(
+							"errors").getNodeValue();
 
-					if (!testsFailures.equals("0"))
+					if (!testsFailures.equals("0") || !testsErrors.equals("0"))
 						testResult = "failed";
 				}
 
-				//testFile.delete();
+				testFile.delete();
 			}
 		}
 
