@@ -25,41 +25,42 @@ class Client
 		puts "USER:" + user 
 
 		# Check HOST
-		begin
-		uri = URI(log_host)
-		res = Net::HTTP.get_response(uri)
-		if res.code == '200'
-			puts "FIND HOST. SUCCESS!!!"
-		end
-		rescue
-			puts ERROR_UNKNOWN_HOST
-			exit 1
-		end
+		#begin
+		#uri = URI(log_host)
+		#res = Net::HTTP.get_response(uri)
+		#if res.code == '200'
+		#	puts "FIND HOST. SUCCESS!!!"
+		#end
+		#rescue
+		#	puts ERROR_UNKNOWN_HOST
+		#	exit 1
+		#end
 
 		#check REPO
-		find = false
-		Dir.foreach(log_repo) do |fname|
-			if fname == ".git"
-				puts "FIND REPO. SUCCESS!!!"
-				find = true
-				break
-			end
-		end
-		if find == false
-			puts ERROR_NO_LOCAL_REPO
-			exit 3
-		end
+		#find = false
+		#Dir.foreach(log_repo) do |fname|
+		#	if fname == ".git"
+		#		puts "FIND REPO. SUCCESS!!!"
+		#		find = true
+		#		break
+		#	end
+		#end
+		#if find == false
+		#	puts ERROR_NO_LOCAL_REPO
+		#	exit 3
+		#end
 		
 		log_r.each_line do |line|			
 			if line.include? "update by push"
-				hash=line[0..6]
-				date=line[36..59]			
+				#hash=line[0..6]
+				#date=line[36..59]
+				hash, date = line.match(/^(.*) refs.*@{(.*)}.*$/i).captures			
 				json_string = {
-			      		"type"=>type, 
-			      		"user_name"=>user,
+					"type"=>type, 
+					"user_name"=>user,
 					"hash"=>hash,
 					"date"=>date
-			     	}.to_json
+				}.to_json
 
 				begin
 					uri = URI(log_host)

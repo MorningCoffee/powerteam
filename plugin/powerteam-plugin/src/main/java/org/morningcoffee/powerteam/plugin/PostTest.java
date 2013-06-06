@@ -55,12 +55,11 @@ public class PostTest extends AbstractMojo {
 						testResult = "failed";
 				}
 
-				testFile.delete();
+				//testFile.delete();
 			}
 		}
 
 		long timeStamp = new Date().getTime();
-		//long timeStamp = System.currentTimeMillis();
 		RequestGen rg = new RequestGen(PreTest.time, timeStamp, testResult,
 				GitInfo.getName());
 		String data = "data=" + rg.getJSON();
